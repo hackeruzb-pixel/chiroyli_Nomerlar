@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GOLD NOMERLAR — Chiroyli Nomerlar</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#070707;
+    color:white;
+}
+
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(7,7,7,.95);
+    border-bottom:1px solid #292929;
+}
+
+.nav{
+    width:92%;
+    max-width:1200px;
+    margin:auto;
+    padding:18px 0;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:bold;
+    color:#ffd700;
+}
+
+.nav a{
+    color:white;
+    text-decoration:none;
+    margin-left:20px;
+}
+
+.hero{
+    min-height:500px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    padding:50px 20px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #352b0c,
+            #070707 60%
+        );
+}
+
+.hero h1{
+    font-size:55px;
+    color:#ffd700;
+    margin-bottom:20px;
+}
+
+.hero h2{
+    font-size:25px;
+    margin-bottom:15px;
+}
+
+.hero p{
+    color:#aaa;
+    font-size:18px;
+    max-width:650px;
+    margin:auto;
+}
+
+.btn{
+    display:inline-block;
+    margin-top:25px;
+    padding:14px 25px;
+    border-radius:12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffd700,
+            #a67c00
+        );
+
+    color:#000;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.container{
+    width:92%;
+    max-width:1200px;
+    margin:50px auto;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.section-title h2{
+    color:#ffd700;
+    font-size:32px;
+}
+
+.section-title p{
+    color:#888;
+    margin-top:10px;
+}
+
+.search-box{
+    background:#111;
+    border:1px solid #292929;
+    padding:25px;
+    border-radius:18px;
+    margin-bottom:30px;
+}
+
+.search-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:12px;
+}
+
+input,
+select{
+    width:100%;
+    padding:15px;
+
+    background:#090909;
+    border:1px solid #333;
+    color:white;
+
+    border-radius:12px;
+    outline:none;
+}
+
+input:focus,
+select:focus{
+    border-color:#ffd700;
+}
+
+.numbers-grid{
+    display:grid;
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(250px,1fr)
+        );
+
+    gap:20px;
+}
+
+.card{
+    background:
+        linear-gradient(
+            145deg,
+            #151515,
+            #0c0c0c
+        );
+
+    border:1px solid #292929;
+    border-radius:18px;
+
+    padding:22px;
+
+    transition:.2s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    border-color:#806b20;
+}
+
+.card-number{
+    font-size:25px;
+    font-weight:bold;
+    color:#ffd700;
+    margin-bottom:12px;
+}
+
+.operator{
+    color:#aaa;
+    margin-bottom:10px;
+}
+
+.price{
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:18px;
+}
+
+.order{
+    width:100%;
+    padding:12px;
+
+    border:none;
+    border-radius:10px;
+
+    background:#ffd700;
+    color:#000;
+
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.loading{
+    text-align:center;
+    padding:40px;
+    color:#ffd700;
+}
+
+.empty{
+    text-align:center;
+    padding:50px;
+    color:#888;
+}
+
+.promo{
+    background:
+        linear-gradient(
+            135deg,
+            #18120a,
+            #0c0c0c
+        );
+
+    border:1px solid #806b20;
+    border-radius:20px;
+
+    padding:40px;
+    text-align:center;
+}
+
+.promo h2{
+    color:#ffd700;
+    font-size:35px;
+    margin-bottom:15px;
+}
+
+footer{
+    border-top:1px solid #292929;
+    padding:35px 20px;
+    text-align:center;
+    color:#777;
+}
+
+@media(max-width:700px){
+
+    .hero h1{
+        font-size:38px;
+    }
+
+    .hero h2{
+        font-size:21px;
+    }
+
+    .search-grid{
+        grid-template-columns:1fr;
+    }
+
+    .nav{
+        flex-direction:column;
+    }
+
+    .nav a{
+        margin:0 7px;
+        font-size:14px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<header>
+
+<div class="nav">
+
+<div class="logo">
+💎 GOLD NOMERLAR
+</div>
+
+<div>
+
+<a href="#home">
+Bosh sahifa
+</a>
+
+<a href="#nomerlar">
+Nomerlar
+</a>
+
+<a href="#aksiya">
+Aksiya
+</a>
+
+<a href="#aloqa">
+Aloqa
+</a>
+
+</div>
+
+</div>
+
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+<div>
+
+<h1>
+GOLD NOMERLAR
+</h1>
+
+<h2>
+✨ O‘zingizga mos chiroyli nomerni tanlang
+</h2>
+
+<p>
+Beeline, Ucell, Uzmobile va boshqa operatorlardan
+chiroyli va esda qolarli nomerlar.
+</p>
+
+<a
+href="#nomerlar"
+class="btn"
+>
+Nomerlarni ko‘rish
+</a>
+
+</div>
+
+</section>
+
+
+<!-- NUMBERS -->
+
+<section
+class="container"
+id="nomerlar"
+>
+
+<div class="section-title">
+
+<h2>
+📱 Chiroyli nomerlar
+</h2>
+
+<p>
+Kerakli nomerni qidiring va buyurtma bering
+</p>
+
+</div>
+
+
+<div class="search-box">
+
+<div class="search-grid">
+
+<input
+id="searchInput"
+placeholder="🔎 Nomer qidiring..."
+>
+
+<select id="operatorFilter">
+
+<option value="all">
+Barcha operatorlar
+</option>
+
+<option value="Beeline">
+Beeline
+</option>
+
+<option value="Ucell">
+Ucell
+</option>
+
+<option value="Uzmobile">
+Uzmobile
+</option>
+
+<option value="Mobiuz">
+Mobiuz
+</option>
+
+<option value="Humans">
+Humans
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<div
+id="loading"
+class="loading"
+>
+⏳ Nomerlar yuklanmoqda...
+</div>
+
+
+<div
+id="numbersGrid"
+class="numbers-grid"
+>
+</div>
+
+
+<div
+id="empty"
+class="empty"
+style="display:none;"
+>
+😔 Siz qidirgan nomer topilmadi.
+</div>
+
+</section>
+
+
+<!-- PROMO -->
+
+<section
+class="container"
+id="aksiya"
+>
+
+<div class="promo">
+
+<h2>
+🔥 MAXSUS AKSIYA
+</h2>
+
+<p>
+Chiroyli nomerlarga maxsus chegirmalar!
+</p>
+
+<p style="margin-top:10px;color:#aaa;">
+Omad barabanida chegirma yutib oling.
+</p>
+
+<a
+href="https://hackeruzb-pixel.github.io/gold-nomer/"
+target="_blank"
+class="btn"
+>
+Baraban aylantirish
+</a>
+
+</div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section
+class="container"
+id="aloqa"
+>
+
+<div class="section-title">
+
+<h2>
+📞 Biz bilan bog‘laning
+</h2>
+
+<p>
+Nomer yoqqan bo‘lsa, Telegram orqali yozing.
+</p>
+
+<a
+href="https://t.me/Code4jannah"
+target="_blank"
+class="btn"
+>
+@Code4jannah
+</a>
+
+</div>
+
+</section>
+
+
+<footer>
+
+GOLD NOMERLAR © 2026
+
+<br><br>
+
+Toshkent shahri, Chilonzor 16-mavze, 18
+
+</footer>
+
+
+<script type="module">
+
+import { db } from "./firebase-config.js";
+
+import {
+    collection,
+    onSnapshot
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+
+let numbers = [];
+
+const grid = document.getElementById("numbersGrid");
+const loading = document.getElementById("loading");
+const empty = document.getElementById("empty");
+
+const searchInput =
+    document.getElementById("searchInput");
+
+const operatorFilter =
+    document.getElementById("operatorFilter");
+
+
+/* ==========================================
+   FIRESTORE'DAN NOMERLARNI OLISH
+========================================== */
+
+function loadNumbers() {
+
+    const numbersRef =
+        collection(db, "numbers");
+
+
+    onSnapshot(
+        numbersRef,
+
+        (snapshot) => {
+
+            numbers = [];
+
+
+            snapshot.forEach((doc) => {
+
+                const data = doc.data();
+
+
+                /*
+                 Faqat SOTILMAGAN nomerlar
+                */
+
+              numbers.push({
+
+    id: doc.id,
+
+    phone: String(data.phone || ""),
+
+    operator:
+        String(data.operator || "Noma'lum"),
+
+    price:
+        Number(data.price || 0),
+
+    status:
+        String(data.status || "available")
+
+});
+
+            });
+
+
+            /*
+             Narx bo‘yicha tartiblash
+            */
+
+            numbers.sort(
+                (a, b) =>
+                    a.price - b.price
+            );
+
+
+            loading.style.display = "none";
+
+
+            renderNumbers();
+
+        },
+
+        (error) => {
+
+            console.error(
+                "Firestore xatosi:",
+                error
+            );
+
+
+            loading.style.display = "block";
+
+            loading.innerHTML = `
+                ❌ Nomerlarni yuklashda xatolik.<br><br>
+
+                <small style="color:#aaa;">
+                    ${escapeHtml(error.message)}
+                </small>
+            `;
+
+        }
+
+    );
+
+}
+
+
+/* ==========================================
+   NOMERLARNI EKRANGA CHIQARISH
+========================================== */
+
+function renderNumbers() {
+
+    const search =
+        searchInput.value
+            .toLowerCase()
+            .replace(/\s/g, "")
+            .trim();
+
+
+    const selectedOperator =
+        operatorFilter.value
+            .toLowerCase()
+            .trim();
+
+
+    grid.innerHTML = "";
+
+
+    const filtered =
+        numbers.filter((item) => {
+
+
+            /*
+             Nomer ichidan qidirish
+             Masalan:
+             90 777
+             907777
+            */
+
+            const phone =
+                String(item.phone || "")
+                    .toLowerCase();
+
+
+            const phoneClean =
+                phone.replace(/\s/g, "");
+
+
+            const operator =
+                String(item.operator || "")
+                    .toLowerCase();
+
+
+            const searchClean =
+                search.replace(/\s/g, "");
+
+
+            const matchSearch =
+                phone.includes(search) ||
+                phoneClean.includes(searchClean);
+
+
+            const matchOperator =
+                selectedOperator === "all" ||
+                operator === selectedOperator;
+
+
+            return (
+                matchSearch &&
+                matchOperator
+            );
+
+        });
+
+
+    /*
+     Hech qanday nomer topilmasa
+    */
+
+    if (filtered.length === 0) {
+
+        empty.style.display = "block";
+
+        return;
+
+    }
+
+
+    empty.style.display = "none";
+
+
+    /*
+     Cardlarni chiqarish
+    */
+
+    filtered.forEach((item) => {
+
+        const card =
+            document.createElement("div");
+
+
+        card.className = "card";
+
+
+        const phone =
+            String(item.phone || "");
+
+
+        const operator =
+            String(
+                item.operator || "Noma'lum"
+            );
+
+
+        const price =
+            Number(item.price || 0);
+
+
+        card.innerHTML = `
+
+            <div class="card-number">
+                📱 ${escapeHtml(phone)}
+            </div>
+
+            <div class="operator">
+                📡 ${escapeHtml(operator)}
+            </div>
+
+            <div class="price">
+                💰 ${formatPrice(price)}
+            </div>
+
+            <button
+                class="order"
+            >
+                📲 Buyurtma berish
+            </button>
+
+        `;
+
+
+        /*
+         Buyurtma tugmasi
+        */
+
+        const orderButton =
+            card.querySelector(".order");
+
+
+        orderButton.addEventListener(
+            "click",
+            () => {
+
+                sendTelegram(
+                    phone,
+                    operator,
+                    price
+                );
+
+            }
+        );
+
+
+        grid.appendChild(card);
+
+    });
+
+}
+
+
+/* ==========================================
+   QIDIRUV
+========================================== */
+
+searchInput.addEventListener(
+    "input",
+    renderNumbers
+);
+
+
+operatorFilter.addEventListener(
+    "change",
+    renderNumbers
+);
+
+
+/* ==========================================
+   TELEGRAM BUYURTMA
+========================================== */
+
+function sendTelegram(
+    phone,
+    operator,
+    price
+) {
+
+
+    const message =
+        `Assalomu alaykum! 👋
+
+` +
+        `Men GOLD NOMERLAR saytidan nomer tanladim.
+
+` +
+        `📱 Nomer: ${phone}
+` +
+        `📡 Operator: ${operator}
+` +
+        `💰 Narx: ${formatPrice(price)}
+
+` +
+        `Shu nomerni rasmiylashtirib berishingizni so‘rayman.`;
+
+
+    const url =
+        "https://t.me/Code4jannah?text=" +
+        encodeURIComponent(message);
+
+
+    window.open(
+        url,
+        "_blank"
+    );
+
+}
+
+
+/* ==========================================
+   NARX
+========================================== */
+
+function formatPrice(price) {
+
+    if (
+        !price ||
+        Number(price) === 0
+    ) {
+
+        return "Kelishiladi";
+
+    }
+
+
+    return Number(price)
+        .toLocaleString("uz-UZ")
+        + " so‘m";
+
+}
+
+
+/* ==========================================
+   XAVFSIZ HTML
+========================================== */
+
+function escapeHtml(text) {
+
+    return String(text)
+
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
+}
+
+
+/* ==========================================
+   START
+========================================== */
+
+loadNumbers();
+
+</script>
+<script>
+const params = new URLSearchParams(window.location.search);
+
+if (params.get("panel") === "gold") {
+    window.location.replace("admin.html");
+}
+</script>   
+</body>
+</html>

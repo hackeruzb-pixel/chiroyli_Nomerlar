@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GOLD NOMERLAR | Admin</title>
+
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#080808;
+    color:white;
+    min-height:100vh;
+}
+
+header{
+    background:linear-gradient(135deg,#111,#1b1505);
+    border-bottom:1px solid #d4af37;
+    padding:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
+    color:#ffd700;
+}
+
+.logout{
+    border:none;
+    padding:10px 18px;
+    border-radius:10px;
+    background:#b91c1c;
+    color:white;
+    cursor:pointer;
+}
+
+.container{
+    width:95%;
+    max-width:1400px;
+    margin:30px auto;
+}
+
+.login-box,
+.panel{
+    background:#111;
+    border:1px solid #292929;
+    border-radius:18px;
+    padding:25px;
+    margin-bottom:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,.3);
+}
+
+.login-box{
+    max-width:450px;
+    margin:100px auto;
+}
+
+h1,h2{
+    margin-bottom:20px;
+}
+
+h1{
+    color:#ffd700;
+}
+
+h2{
+    color:#fff;
+}
+
+input,
+select{
+    width:100%;
+    padding:13px;
+    margin:7px 0;
+    border-radius:10px;
+    border:1px solid #333;
+    background:#0b0b0b;
+    color:white;
+    outline:none;
+}
+
+input:focus,
+select:focus{
+    border-color:#d4af37;
+}
+
+button{
+    border:none;
+    border-radius:10px;
+    padding:12px 18px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.gold-btn{
+    background:linear-gradient(135deg,#ffd700,#a67c00);
+    color:#000;
+}
+
+.red-btn{
+    background:#dc2626;
+    color:white;
+}
+
+.green-btn{
+    background:#16a34a;
+    color:white;
+}
+
+.gray-btn{
+    background:#333;
+    color:white;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.stat{
+    background:#151515;
+    border:1px solid #292929;
+    border-radius:15px;
+    padding:20px;
+}
+
+.stat-title{
+    color:#999;
+    margin-bottom:10px;
+}
+
+.stat-number{
+    font-size:28px;
+    color:#ffd700;
+    font-weight:bold;
+}
+
+.import-box{
+    border:1px dashed #806b20;
+    padding:20px;
+    border-radius:15px;
+    background:#0d0d0d;
+}
+
+.file-input{
+    padding:15px;
+    background:#151515;
+}
+
+.progress{
+    margin-top:15px;
+    color:#ffd700;
+}
+
+.table-wrap{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:800px;
+}
+
+th,
+td{
+    padding:13px;
+    border-bottom:1px solid #292929;
+    text-align:left;
+}
+
+th{
+    color:#ffd700;
+    background:#161616;
+}
+
+.status{
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.available{
+    background:#064e3b;
+    color:#6ee7b7;
+}
+
+.sold{
+    background:#7f1d1d;
+    color:#fecaca;
+}
+
+.actions{
+    display:flex;
+    gap:7px;
+    flex-wrap:wrap;
+}
+
+.message{
+    padding:12px;
+    margin-top:15px;
+    border-radius:10px;
+    display:none;
+}
+
+.success{
+    display:block;
+    background:#064e3b;
+    color:#6ee7b7;
+}
+
+.error{
+    display:block;
+    background:#7f1d1d;
+    color:#fecaca;
+}
+
+.top-actions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.search-row{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:10px;
+}
+
+@media(max-width:700px){
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .search-row{
+        grid-template-columns:1fr;
+    }
+
+    header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .container{
+        width:92%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header id="header" style="display:none;">
+    <div class="logo">💎 GOLD NOMERLAR</div>
+
+    <button class="logout" id="logoutBtn">
+        Chiqish
+    </button>
+</header>
+
+
+<!-- LOGIN -->
+
+<div id="loginPage">
+
+    <div class="login-box">
+
+        <h1>🔐 Admin panel</h1>
+
+        <p style="color:#aaa;margin-bottom:20px;">
+            GOLD NOMERLAR boshqaruv paneli
+        </p>
+
+        <input
+            type="email"
+            id="email"
+            placeholder="Admin email"
+        >
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Parol"
+        >
+
+        <button
+            class="gold-btn"
+            id="loginBtn"
+            style="width:100%;margin-top:10px;"
+        >
+            Kirish
+        </button>
+
+        <div id="loginMessage" class="message"></div>
+
+    </div>
+
+</div>
+
+
+<!-- ADMIN -->
+
+<div id="adminPage" style="display:none;">
+
+<div class="container">
+
+    <div class="panel">
+
+        <h1>📱 Nomerlar bazasi</h1>
+
+        <p style="color:#999;">
+            Excel yoki CSV fayldan nomerlarni bir martada bazaga yuklang.
+        </p>
+
+    </div>
+
+
+    <!-- STATISTICS -->
+
+    <div class="stats">
+
+        <div class="stat">
+            <div class="stat-title">Jami nomer</div>
+            <div class="stat-number" id="totalCount">0</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-title">Mavjud</div>
+            <div class="stat-number" id="availableCount">0</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-title">Sotilgan</div>
+            <div class="stat-number" id="soldCount">0</div>
+        </div>
+
+    </div>
+
+
+    <!-- IMPORT -->
+
+    <div class="panel">
+
+        <h2>📥 Excel / CSV yuklash</h2>
+
+        <div class="import-box">
+
+            <p style="color:#aaa;margin-bottom:15px;">
+                Faylda quyidagi ustunlar bo‘lishi kerak:
+            </p>
+
+            <p style="color:#ffd700;margin-bottom:15px;">
+                Nomer | Operator | Narx
+            </p>
+
+            <input
+                type="file"
+                id="excelFile"
+                class="file-input"
+                accept=".xlsx,.xls,.csv"
+            >
+
+            <div style="margin-top:15px;">
+
+                <button
+                    class="gold-btn"
+                    id="importBtn"
+                >
+                    📥 Bazaga yuklash
+                </button>
+
+                <button
+                    class="gray-btn"
+                    id="sampleBtn"
+                >
+                    📄 Namuna Excel
+                </button>
+
+            </div>
+
+            <div id="importMessage" class="message"></div>
+
+            <div
+                id="progress"
+                class="progress"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- MANUAL ADD -->
+
+   <div class="panel">
+
+    <h2>➕ Bitta nomer qo‘shish</h2>
+
+    <div class="search-row">
+
+        <input 
+            id="newPhone" 
+            placeholder="Nomer: 90 777 77 77"
+        >
+
+        <select id="newOperator">
+
+            <option value="">
+                Operatorni tanlang
+            </option>
+
+            <option value="Beeline">
+                Beeline
+            </option>
+
+            <option value="Ucell">
+                Ucell
+            </option>
+
+            <option value="Uzmobile">
+                Uzmobile
+            </option>
+
+            <option value="Mobiuz">
+                Mobiuz
+            </option>
+
+            <option value="Humans">
+                Humans
+            </option>
+
+        </select>
+
+    </div>
+
+    <input 
+        id="newPrice" 
+        type="number" 
+        placeholder="Narx: 500000"
+    >
+
+    <button 
+        class="gold-btn" 
+        id="addBtn"
+    >
+        Qo‘shish
+    </button>
+
+    <div id="addMessage" class="message"></div>
+
+</div>
+
+
+    <!-- SEARCH -->
+
+    <div class="panel">
+
+        <h2>🔎 Bazadan qidirish</h2>
+
+        <div class="search-row">
+
+            <input
+                id="adminSearch"
+                placeholder="Nomer yoki operator..."
+            >
+
+            <select id="statusFilter">
+
+                <option value="all">
+                    Barchasi
+                </option>
+
+                <option value="available">
+                    Mavjud
+                </option>
+
+                <option value="sold">
+                    Sotilgan
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <!-- TABLE -->
+
+    <div class="panel">
+
+        <h2>📋 Nomerlar</h2>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>#</th>
+                        <th>Nomer</th>
+                        <th>Operator</th>
+                        <th>Narx</th>
+                        <th>Holat</th>
+                        <th>Amal</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="numbersTable">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<script type="module">
+
+import {
+    db,
+    auth
+} from "./firebase-config.js";
+
+import {
+    signInWithEmailAndPassword,
+    onAuthStateChanged,
+    signOut
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+
+import {
+    collection,
+    getDocs,
+    addDoc,
+    deleteDoc,
+    updateDoc,
+    doc,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+
+const loginPage = document.getElementById("loginPage");
+const adminPage = document.getElementById("adminPage");
+const header = document.getElementById("header");
+
+const loginBtn = document.getElementById("loginBtn");
+const logoutBtn = document.getElementById("logoutBtn");
+
+let numbers = [];
+
+
+/* =========================
+   LOGIN
+========================= */
+
+loginBtn.addEventListener("click", async () => {
+
+    const email =
+        document.getElementById("email").value.trim();
+
+    const password =
+        document.getElementById("password").value;
+
+    const message =
+        document.getElementById("loginMessage");
+
+    if(!email || !password){
+
+        message.className = "message error";
+        message.textContent =
+            "Email va parolni kiriting.";
+
+        return;
+    }
+
+    try{
+
+        await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
+
+    }catch(error){
+
+        message.className = "message error";
+
+        message.textContent =
+            "Kirishda xatolik: " + error.message;
+
+    }
+
+});
+
+
+/* =========================
+   AUTH STATE
+========================= */
+
+onAuthStateChanged(auth, async (user) => {
+
+    if(user){
+
+        loginPage.style.display = "none";
+        adminPage.style.display = "block";
+        header.style.display = "flex";
+
+        await loadNumbers();
+
+    }else{
+
+        loginPage.style.display = "block";
+        adminPage.style.display = "none";
+        header.style.display = "none";
+
+    }
+
+});
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+logoutBtn.addEventListener("click", async () => {
+
+    await signOut(auth);
+
+});
+
+
+/* =========================
+   LOAD NUMBERS
+========================= */
+
+async function loadNumbers(){
+
+    try{
+
+        const snapshot =
+            await getDocs(
+                collection(db,"numbers")
+            );
+
+        numbers = [];
+
+        snapshot.forEach(item => {
+
+            numbers.push({
+                id:item.id,
+                ...item.data()
+            });
+
+        });
+
+        numbers.sort((a,b) => {
+
+            const aa = a.createdAt?.seconds || 0;
+            const bb = b.createdAt?.seconds || 0;
+
+            return bb-aa;
+
+        });
+
+        renderNumbers();
+
+        updateStats();
+
+    }catch(error){
+
+        console.error(error);
+
+        alert(
+            "Bazani yuklashda xatolik: "
+            + error.message
+        );
+
+    }
+
+}
+
+
+/* =========================
+   STATS
+========================= */
+
+function updateStats(){
+
+    const total = numbers.length;
+
+    const available =
+        numbers.filter(
+            n => n.status !== "sold"
+        ).length;
+
+    const sold =
+        numbers.filter(
+            n => n.status === "sold"
+        ).length;
+
+    document.getElementById("totalCount")
+        .textContent = total;
+
+    document.getElementById("availableCount")
+        .textContent = available;
+
+    document.getElementById("soldCount")
+        .textContent = sold;
+
+}
+
+
+/* =========================
+   RENDER
+========================= */
+
+function renderNumbers(){
+
+    const tbody =
+        document.getElementById("numbersTable");
+
+    const search =
+        document.getElementById("adminSearch")
+            .value
+            .toLowerCase()
+            .trim();
+
+    const filter =
+        document.getElementById("statusFilter")
+            .value;
+
+    tbody.innerHTML = "";
+
+    const filtered =
+        numbers.filter(item => {
+
+            const phone =
+                String(item.phone || "")
+                    .toLowerCase();
+
+            const operator =
+                String(item.operator || "")
+                    .toLowerCase();
+
+            const matchesSearch =
+                phone.includes(search) ||
+                operator.includes(search);
+
+            const matchesStatus =
+                filter === "all" ||
+                item.status === filter ||
+                (
+                    filter === "available" &&
+                    !item.status
+                );
+
+            return matchesSearch && matchesStatus;
+
+        });
+
+
+    filtered.forEach((item,index) => {
+
+        const tr =
+            document.createElement("tr");
+
+        const isSold =
+            item.status === "sold";
+
+        tr.innerHTML = `
+
+            <td>${index + 1}</td>
+
+            <td>
+                <strong>
+                    ${escapeHtml(item.phone || "")}
+                </strong>
+            </td>
+
+            <td>
+                ${escapeHtml(item.operator || "")}
+            </td>
+
+            <td>
+                ${formatPrice(item.price)}
+            </td>
+
+            <td>
+
+                <span class="status ${
+                    isSold ? "sold" : "available"
+                }">
+
+                    ${
+                        isSold
+                        ? "SOTILGAN"
+                        : "MAVJUD"
+                    }
+
+                </span>
+
+            </td>
+
+            <td>
+
+                <div class="actions">
+
+                    <button
+                        class="${
+                            isSold
+                            ? "green-btn"
+                            : "gray-btn"
+                        }"
+                        onclick="toggleStatus('${item.id}', '${isSold ? "available" : "sold"}')"
+                    >
+
+                        ${
+                            isSold
+                            ? "Mavjud"
+                            : "Sotildi"
+                        }
+
+                    </button>
+
+                    <button
+                        class="red-btn"
+                        onclick="deleteNumber('${item.id}')"
+                    >
+                        O‘chirish
+                    </button>
+
+                </div>
+
+            </td>
+        `;
+
+        tbody.appendChild(tr);
+
+    });
+
+}
+
+
+/* =========================
+   ADD ONE NUMBER
+========================= */
+
+document.getElementById("addBtn")
+.addEventListener("click", async () => {
+
+    const phone =
+        document.getElementById("newPhone")
+            .value.trim();
+
+    const operator =
+        document.getElementById("newOperator")
+            .value.trim();
+
+    const price =
+        Number(
+            document.getElementById("newPrice")
+                .value
+        );
+
+    const message =
+        document.getElementById("addMessage");
+
+
+    if(!phone || !operator || !price){
+
+        message.className =
+            "message error";
+
+        message.textContent =
+            "Barcha ma'lumotlarni kiriting.";
+
+        return;
+
+    }
+
+
+    const normalized =
+        normalizePhone(phone);
+
+
+    const exists =
+        numbers.some(
+            n => normalizePhone(n.phone) === normalized
+        );
+
+
+    if(exists){
+
+        message.className =
+            "message error";
+
+        message.textContent =
+            "Bu nomer bazada mavjud.";
+
+        return;
+
+    }
+
+
+    try{
+
+        await addDoc(
+            collection(db,"numbers"),
+            {
+                phone:phone,
+                operator:operator,
+                price:price,
+                status:"available",
+                createdAt:serverTimestamp()
+            }
+        );
+
+
+        message.className =
+            "message success";
+
+        message.textContent =
+            "Nomer muvaffaqiyatli qo‘shildi.";
+
+        document.getElementById("newPhone").value = "";
+        document.getElementById("newOperator").value = "";
+        document.getElementById("newPrice").value = "";
+
+        await loadNumbers();
+
+    }catch(error){
+
+        message.className =
+            "message error";
+
+        message.textContent =
+            error.message;
+
+    }
+
+});
+
+
+/* =========================
+   IMPORT EXCEL
+========================= */
+
+document.getElementById("importBtn")
+.addEventListener("click", async () => {
+
+    const file =
+        document.getElementById("excelFile")
+            .files[0];
+
+    const message =
+        document.getElementById("importMessage");
+
+    const progress =
+        document.getElementById("progress");
+
+
+    if(!file){
+
+        message.className =
+            "message error";
+
+        message.textContent =
+            "Avval Excel yoki CSV fayl tanlang.";
+
+        return;
+
+    }
+
+
+    try{
+
+        progress.textContent =
+            "⏳ Fayl o‘qilmoqda...";
+
+
+        const data =
+            await file.arrayBuffer();
+
+
+        const workbook =
+            XLSX.read(data,{
+                type:"array"
+            });
+
+
+        const sheetName =
+            workbook.SheetNames[0];
+
+
+        const sheet =
+            workbook.Sheets[sheetName];
+
+
+        const rows =
+            XLSX.utils.sheet_to_json(
+                sheet,
+                {
+                    defval:""
+                }
+            );
+
+
+        if(!rows.length){
+
+            throw new Error(
+                "Excel faylda ma'lumot yo‘q."
+            );
+
+        }
+
+
+        progress.textContent =
+            `📦 ${rows.length} ta qator topildi...`;
+
+
+        let added = 0;
+        let skipped = 0;
+
+
+        const existing =
+            new Set(
+                numbers.map(
+                    n => normalizePhone(n.phone)
+                )
+            );
+
+
+        for(let i=0; i<rows.length; i++){
+
+            const row = rows[i];
+
+
+            const phone =
+                getValue(
+                    row,
+                    [
+                        "Nomer",
+                        "nomer",
+                        "Telefon",
+                        "telefon",
+                        "Phone",
+                        "phone"
+                    ]
+                );
+
+
+            const operator =
+                getValue(
+                    row,
+                    [
+                        "Operator",
+                        "operator"
+                    ]
+                );
+
+
+            const priceValue =
+                getValue(
+                    row,
+                    [
+                        "Narx",
+                        "narx",
+                        "Price",
+                        "price"
+                    ]
+                );
+
+
+            if(!phone){
+
+                skipped++;
+                continue;
+
+            }
+
+
+            const normalized =
+                normalizePhone(phone);
+
+
+            if(existing.has(normalized)){
+
+                skipped++;
+                continue;
+
+            }
+
+
+            let price =
+                Number(
+                    String(priceValue)
+                        .replace(/[^\d]/g,"")
+                );
+
+
+            if(!price){
+                price = 0;
+            }
+
+
+            await addDoc(
+                collection(db,"numbers"),
+                {
+                    phone:String(phone).trim(),
+                    operator:String(operator || "Noma'lum").trim(),
+                    price:price,
+                    status:"available",
+                    createdAt:serverTimestamp()
+                }
+            );
+
+
+            existing.add(normalized);
+
+            added++;
+
+
+            progress.textContent =
+                `⏳ ${i+1}/${rows.length} — ${added} ta qo‘shildi`;
+
+        }
+
+
+        message.className =
+            "message success";
+
+        message.textContent =
+            `Tayyor! ${added} ta nomer qo‘shildi. ${skipped} ta o‘tkazib yuborildi.`;
+
+
+        progress.textContent =
+            "✅ Import tugadi";
+
+
+        document.getElementById("excelFile")
+            .value = "";
+
+
+        await loadNumbers();
+
+
+    }catch(error){
+
+        console.error(error);
+
+        message.className =
+            "message error";
+
+        message.textContent =
+            "Import xatosi: " + error.message;
+
+        progress.textContent = "";
+
+    }
+
+});
+
+
+/* =========================
+   SAMPLE FILE
+========================= */
+
+document.getElementById("sampleBtn")
+.addEventListener("click", () => {
+
+    const data = [
+
+        {
+            Nomer:"90 777 77 77",
+            Operator:"Beeline",
+            Narx:500000
+        },
+
+        {
+            Nomer:"93 888 88 88",
+            Operator:"Ucell",
+            Narx:700000
+        },
+
+        {
+            Nomer:"99 111 11 11",
+            Operator:"Uzmobile",
+            Narx:300000
+        }
+
+    ];
+
+
+    const worksheet =
+        XLSX.utils.json_to_sheet(data);
+
+    const workbook =
+        XLSX.utils.book_new();
+
+    XLSX.utils.book_append_sheet(
+        workbook,
+        worksheet,
+        "Nomerlar"
+    );
+
+    XLSX.writeFile(
+        workbook,
+        "gold-nomerlar-namuna.xlsx"
+    );
+
+});
+
+
+/* =========================
+   TOGGLE STATUS
+========================= */
+
+window.toggleStatus = async function(
+    id,
+    status
+){
+
+    try{
+
+        await updateDoc(
+            doc(db,"numbers",id),
+            {
+                status:status
+            }
+        );
+
+        await loadNumbers();
+
+    }catch(error){
+
+        alert(
+            "Xatolik: " + error.message
+        );
+
+    }
+
+};
+
+
+/* =========================
+   DELETE
+========================= */
+
+window.deleteNumber = async function(id){
+
+    const confirmDelete =
+        confirm(
+            "Bu nomerni o‘chirishni xohlaysizmi?"
+        );
+
+    if(!confirmDelete){
+        return;
+    }
+
+
+    try{
+
+        await deleteDoc(
+            doc(db,"numbers",id)
+        );
+
+        await loadNumbers();
+
+    }catch(error){
+
+        alert(
+            "O‘chirishda xatolik: "
+            + error.message
+        );
+
+    }
+
+};
+
+
+/* =========================
+   SEARCH
+========================= */
+
+document.getElementById("adminSearch")
+.addEventListener(
+    "input",
+    renderNumbers
+);
+
+
+document.getElementById("statusFilter")
+.addEventListener(
+    "change",
+    renderNumbers
+);
+
+
+/* =========================
+   HELPERS
+========================= */
+
+function normalizePhone(phone){
+
+    return String(phone || "")
+        .replace(/\D/g,"");
+
+}
+
+
+function getValue(row, names){
+
+    for(const name of names){
+
+        if(
+            Object.prototype.hasOwnProperty
+                .call(row,name)
+        ){
+
+            return row[name];
+
+        }
+
+    }
+
+    return "";
+
+}
+
+
+function formatPrice(price){
+
+    const number =
+        Number(price || 0);
+
+    return number.toLocaleString("uz-UZ")
+        + " so‘m";
+
+}
+
+
+function escapeHtml(text){
+
+    return String(text)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+
+}
+
+</script>
+
+</body>
+</html>
