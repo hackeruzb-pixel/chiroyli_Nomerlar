@@ -8,6 +8,7 @@
 <title>GOLD NOMERLAR — Chiroyli Nomerlar</title>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap');
 
 *{
     margin:0;
@@ -15,46 +16,132 @@
     box-sizing:border-box;
 }
 
-body{
-    font-family:Arial,sans-serif;
-    background:#070707;
-    color:white;
+html{
+    scroll-behavior:smooth;
 }
+
+body{
+    font-family:'Inter',sans-serif;
+    background:
+        radial-gradient(circle at 15% 10%, rgba(255,215,0,.08), transparent 28%),
+        radial-gradient(circle at 85% 35%, rgba(180,120,0,.07), transparent 30%),
+        #050505;
+    color:#fff;
+    min-height:100vh;
+    overflow-x:hidden;
+}
+
+/* GOLD LIGHT */
+body::before{
+    content:"";
+    position:fixed;
+    width:500px;
+    height:500px;
+    border-radius:50%;
+    background:rgba(255,215,0,.035);
+    filter:blur(100px);
+    top:-200px;
+    left:-200px;
+    pointer-events:none;
+    z-index:-1;
+}
+
+/* ================= HEADER ================= */
 
 header{
     position:sticky;
     top:0;
     z-index:1000;
-    background:rgba(7,7,7,.95);
-    border-bottom:1px solid #292929;
+
+    background:rgba(5,5,5,.78);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+
+    border-bottom:1px solid rgba(255,215,0,.12);
+    box-shadow:0 10px 40px rgba(0,0,0,.35);
 }
 
 .nav{
     width:92%;
-    max-width:1200px;
+    max-width:1250px;
     margin:auto;
-    padding:18px 0;
+    padding:17px 0;
 
     display:flex;
     justify-content:space-between;
     align-items:center;
-    gap:20px;
+    gap:30px;
 }
 
+/* LOGO */
+
 .logo{
-    font-size:22px;
-    font-weight:bold;
+    font-family:'Montserrat',sans-serif;
+    font-size:21px;
+    font-weight:800;
+
+    background:linear-gradient(
+        90deg,
+        #fff2a6,
+        #ffd700,
+        #b8860b,
+        #ffe36e
+    );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    filter:drop-shadow(0 0 10px rgba(255,215,0,.25));
+    white-space:nowrap;
+}
+
+/* NAV LINKS */
+
+.nav a{
+    position:relative;
+
+    color:#cfcfcf;
+    text-decoration:none;
+
+    margin-left:25px;
+
+    font-size:14px;
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.nav a::after{
+    content:"";
+
+    position:absolute;
+    left:0;
+    bottom:-7px;
+
+    width:0;
+    height:2px;
+
+    background:linear-gradient(
+        90deg,
+        #ffd700,
+        #fff0a0
+    );
+
+    transition:.3s;
+}
+
+.nav a:hover{
     color:#ffd700;
 }
 
-.nav a{
-    color:white;
-    text-decoration:none;
-    margin-left:20px;
+.nav a:hover::after{
+    width:100%;
 }
 
+/* ================= HERO ================= */
+
 .hero{
-    min-height:500px;
+    min-height:620px;
 
     display:flex;
     justify-content:center;
@@ -62,234 +149,786 @@ header{
 
     text-align:center;
 
-    padding:50px 20px;
+    padding:80px 20px;
+
+    position:relative;
+    overflow:hidden;
 
     background:
         radial-gradient(
             circle at center,
-            #352b0c,
-            #070707 60%
+            rgba(255,215,0,.13),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at center,
+            #171304 0%,
+            #080808 45%,
+            #050505 75%
         );
 }
 
+.hero::before{
+    content:"";
+
+    position:absolute;
+    width:650px;
+    height:650px;
+
+    border:1px solid rgba(255,215,0,.08);
+    border-radius:50%;
+
+    animation:rotateGlow 18s linear infinite;
+}
+
+.hero::after{
+    content:"";
+
+    position:absolute;
+    width:900px;
+    height:1px;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,215,0,.35),
+        transparent
+    );
+
+    transform:rotate(-25deg);
+}
+
+@keyframes rotateGlow{
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+.hero > div{
+    position:relative;
+    z-index:2;
+    max-width:850px;
+}
+
 .hero h1{
-    font-size:55px;
-    color:#ffd700;
-    margin-bottom:20px;
+    font-family:'Montserrat',sans-serif;
+
+    font-size:clamp(42px,7vw,78px);
+
+    font-weight:800;
+
+    letter-spacing:4px;
+
+    margin-bottom:22px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fff8bd 0%,
+            #ffd700 35%,
+            #b8860b 70%,
+            #fff0a0 100%
+        );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    filter:
+        drop-shadow(0 0 12px rgba(255,215,0,.35))
+        drop-shadow(0 0 40px rgba(255,215,0,.12));
 }
 
 .hero h2{
-    font-size:25px;
-    margin-bottom:15px;
+    font-size:clamp(20px,3vw,29px);
+    font-weight:700;
+
+    margin-bottom:17px;
+
+    color:#fff;
 }
 
 .hero p{
-    color:#aaa;
-    font-size:18px;
-    max-width:650px;
+    color:#999;
+    font-size:17px;
+    line-height:1.8;
+
+    max-width:680px;
     margin:auto;
 }
 
+/* ================= BUTTON ================= */
+
 .btn{
-    display:inline-block;
-    margin-top:25px;
-    padding:14px 25px;
-    border-radius:12px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    margin-top:30px;
+
+    padding:15px 30px;
+
+    border-radius:14px;
 
     background:
         linear-gradient(
             135deg,
-            #ffd700,
-            #a67c00
+            #fff1a3,
+            #ffd700 40%,
+            #b8860b
         );
 
-    color:#000;
+    color:#080808;
+
     text-decoration:none;
-    font-weight:bold;
+
+    font-weight:800;
+    font-size:15px;
+
+    border:1px solid rgba(255,255,255,.25);
+
+    box-shadow:
+        0 8px 25px rgba(255,215,0,.18),
+        inset 0 1px 0 rgba(255,255,255,.6);
+
+    transition:.3s;
 }
+
+.btn:hover{
+    transform:translateY(-3px) scale(1.02);
+
+    box-shadow:
+        0 14px 40px rgba(255,215,0,.3),
+        0 0 30px rgba(255,215,0,.12);
+}
+
+/* ================= CONTAINER ================= */
 
 .container{
     width:92%;
-    max-width:1200px;
-    margin:50px auto;
+    max-width:1250px;
+    margin:90px auto;
 }
+
+/* ================= SECTION TITLE ================= */
 
 .section-title{
     text-align:center;
-    margin-bottom:30px;
+    margin-bottom:38px;
 }
 
 .section-title h2{
+    font-family:'Montserrat',sans-serif;
+
     color:#ffd700;
-    font-size:32px;
+
+    font-size:clamp(27px,4vw,38px);
+
+    font-weight:800;
+
+    letter-spacing:.5px;
+
+    text-shadow:
+        0 0 20px rgba(255,215,0,.15);
 }
 
 .section-title p{
-    color:#888;
-    margin-top:10px;
+    color:#777;
+    margin-top:12px;
+    font-size:15px;
 }
 
+/* ================= SEARCH ================= */
+
 .search-box{
-    background:#111;
-    border:1px solid #292929;
-    padding:25px;
-    border-radius:18px;
-    margin-bottom:30px;
+    position:relative;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(25,25,25,.9),
+            rgba(10,10,10,.9)
+        );
+
+    border:1px solid rgba(255,215,0,.12);
+
+    padding:24px;
+
+    border-radius:22px;
+
+    margin-bottom:35px;
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.3),
+        inset 0 1px 0 rgba(255,255,255,.03);
+
+    backdrop-filter:blur(15px);
+}
+
+.search-box::before{
+    content:"";
+
+    position:absolute;
+    top:0;
+    left:10%;
+    right:10%;
+
+    height:1px;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,215,0,.5),
+        transparent
+    );
 }
 
 .search-grid{
     display:grid;
     grid-template-columns:2fr 1fr;
-    gap:12px;
+    gap:14px;
 }
 
 input,
 select{
     width:100%;
-    padding:15px;
 
-    background:#090909;
-    border:1px solid #333;
-    color:white;
+    padding:16px 18px;
 
-    border-radius:12px;
+    background:#080808;
+
+    border:1px solid #292929;
+
+    color:#fff;
+
+    border-radius:14px;
+
     outline:none;
+
+    font-family:inherit;
+
+    transition:.3s;
+}
+
+input::placeholder{
+    color:#666;
+}
+
+input:hover,
+select:hover{
+    border-color:#555;
 }
 
 input:focus,
 select:focus{
     border-color:#ffd700;
+
+    box-shadow:
+        0 0 0 3px rgba(255,215,0,.07),
+        0 0 25px rgba(255,215,0,.08);
 }
+
+/* ================= NUMBERS ================= */
 
 .numbers-grid{
     display:grid;
+
     grid-template-columns:
         repeat(
             auto-fill,
-            minmax(250px,1fr)
+            minmax(270px,1fr)
         );
 
-    gap:20px;
+    gap:22px;
 }
 
+/* CARD */
+
 .card{
+    position:relative;
+
+    overflow:hidden;
+
     background:
         linear-gradient(
             145deg,
-            #151515,
-            #0c0c0c
+            rgba(27,27,27,.95),
+            rgba(9,9,9,.95)
         );
 
-    border:1px solid #292929;
-    border-radius:18px;
+    border:1px solid #252525;
 
-    padding:22px;
+    border-radius:22px;
 
-    transition:.2s;
+    padding:25px;
+
+    transition:.35s;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.25);
+}
+
+.card::before{
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+    right:0;
+
+    height:2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #ffd700,
+            transparent
+        );
+
+    opacity:.35;
+
+    transition:.3s;
 }
 
 .card:hover{
-    transform:translateY(-5px);
-    border-color:#806b20;
+    transform:translateY(-8px);
+
+    border-color:rgba(255,215,0,.4);
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.45),
+        0 0 30px rgba(255,215,0,.06);
 }
+
+.card:hover::before{
+    opacity:1;
+}
+
+/* NUMBER */
 
 .card-number{
+    font-family:'Montserrat',sans-serif;
+
     font-size:25px;
-    font-weight:bold;
+
+    font-weight:800;
+
     color:#ffd700;
-    margin-bottom:12px;
+
+    margin-bottom:15px;
+
+    letter-spacing:.5px;
+
+    text-shadow:
+        0 0 15px rgba(255,215,0,.12);
 }
+
+/* OPERATOR */
 
 .operator{
+    display:inline-block;
+
     color:#aaa;
-    margin-bottom:10px;
+
+    margin-bottom:13px;
+
+    font-size:14px;
+
+    background:#151515;
+
+    border:1px solid #252525;
+
+    padding:6px 10px;
+
+    border-radius:8px;
 }
 
+/* PRICE */
+
 .price{
-    font-size:20px;
-    font-weight:bold;
-    margin-bottom:18px;
+    font-size:21px;
+
+    font-weight:800;
+
+    margin-bottom:20px;
+
+    color:#f5f5f5;
 }
+
+/* ORDER */
 
 .order{
     width:100%;
-    padding:12px;
+
+    padding:13px;
 
     border:none;
-    border-radius:10px;
 
-    background:#ffd700;
-    color:#000;
+    border-radius:12px;
 
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.loading{
-    text-align:center;
-    padding:40px;
-    color:#ffd700;
-}
-
-.empty{
-    text-align:center;
-    padding:50px;
-    color:#888;
-}
-
-.promo{
     background:
         linear-gradient(
             135deg,
-            #18120a,
-            #0c0c0c
+            #fff09a,
+            #ffd700,
+            #c49a00
         );
 
-    border:1px solid #806b20;
-    border-radius:20px;
+    color:#080808;
 
-    padding:40px;
+    font-weight:800;
+
+    cursor:pointer;
+
+    font-family:inherit;
+
+    transition:.3s;
+
+    box-shadow:
+        0 5px 15px rgba(255,215,0,.08);
+}
+
+.order:hover{
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 10px 25px rgba(255,215,0,.2);
+}
+
+/* ================= LOADING ================= */
+
+.loading{
     text-align:center;
+
+    padding:55px;
+
+    color:#ffd700;
+
+    font-weight:600;
+}
+
+/* ================= EMPTY ================= */
+
+.empty{
+    text-align:center;
+
+    padding:70px 20px;
+
+    color:#777;
+
+    background:#0b0b0b;
+
+    border:1px dashed #292929;
+
+    border-radius:20px;
+}
+
+/* ================= PROMO ================= */
+
+.promo{
+    position:relative;
+
+    overflow:hidden;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255,215,0,.12),
+            transparent 50%
+        ),
+        linear-gradient(
+            135deg,
+            #181307,
+            #090909
+        );
+
+    border:1px solid rgba(255,215,0,.3);
+
+    border-radius:28px;
+
+    padding:65px 30px;
+
+    text-align:center;
+
+    box-shadow:
+        0 20px 70px rgba(0,0,0,.35);
+}
+
+.promo::before{
+    content:"🔥";
+
+    position:absolute;
+
+    font-size:120px;
+
+    opacity:.04;
+
+    right:30px;
+    bottom:-25px;
 }
 
 .promo h2{
+    font-family:'Montserrat',sans-serif;
+
     color:#ffd700;
-    font-size:35px;
+
+    font-size:clamp(30px,5vw,43px);
+
     margin-bottom:15px;
+
+    text-shadow:
+        0 0 25px rgba(255,215,0,.2);
 }
 
-footer{
-    border-top:1px solid #292929;
-    padding:35px 20px;
-    text-align:center;
-    color:#777;
+.promo p{
+    color:#ccc;
+
+    font-size:17px;
 }
+
+/* ================= CONTACT ================= */
+
+#aloqa{
+    margin-bottom:100px;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    border-top:1px solid rgba(255,215,0,.1);
+
+    padding:40px 20px;
+
+    text-align:center;
+
+    color:#666;
+
+    background:#030303;
+
+    font-size:14px;
+
+    line-height:1.8;
+}
+
+/* ================= SCROLLBAR ================= */
+
+::-webkit-scrollbar{
+    width:8px;
+}
+
+::-webkit-scrollbar-track{
+    background:#050505;
+}
+
+::-webkit-scrollbar-thumb{
+    background:
+        linear-gradient(
+            #8f7000,
+            #ffd700
+        );
+
+    border-radius:20px;
+}
+
+/* ================= SELECTION ================= */
+
+::selection{
+    background:#ffd700;
+    color:#000;
+}
+
+/* ================= MOBILE ================= */
 
 @media(max-width:700px){
 
+    .nav{
+        padding:14px 0;
+
+        flex-direction:column;
+
+        gap:12px;
+    }
+
+    .logo{
+        font-size:19px;
+    }
+
+    .nav a{
+        margin:0 7px;
+
+        font-size:12px;
+    }
+
+    .hero{
+        min-height:560px;
+        padding:60px 18px;
+    }
+
     .hero h1{
-        font-size:38px;
+        font-size:40px;
+        letter-spacing:2px;
     }
 
     .hero h2{
-        font-size:21px;
+        font-size:20px;
+    }
+
+    .hero p{
+        font-size:15px;
+    }
+
+    .container{
+        margin:65px auto;
     }
 
     .search-grid{
         grid-template-columns:1fr;
     }
 
-    .nav{
-        flex-direction:column;
+    .numbers-grid{
+        grid-template-columns:1fr;
     }
 
-    .nav a{
-        margin:0 7px;
-        font-size:14px;
+    .card{
+        padding:22px;
+    }
+
+    .promo{
+        padding:50px 20px;
     }
 
 }
+/* ================= HAMBURGER ================= */
 
+.menu-toggle{
+    display:none;
+
+    width:44px;
+    height:44px;
+
+    border:1px solid rgba(255,215,0,.25);
+    border-radius:12px;
+
+    background:rgba(255,215,0,.06);
+
+    color:#ffd700;
+
+    font-size:25px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.menu-toggle:hover{
+    background:rgba(255,215,0,.12);
+
+    box-shadow:
+        0 0 20px rgba(255,215,0,.12);
+}
+
+
+/* ================= MOBILE MENU ================= */
+
+@media(max-width:700px){
+
+    .nav{
+        position:relative;
+
+        width:92%;
+
+        flex-direction:row;
+
+        padding:14px 0;
+    }
+
+    .menu-toggle{
+        display:flex;
+
+        align-items:center;
+        justify-content:center;
+    }
+
+    .nav-menu{
+        position:absolute;
+
+        top:68px;
+        left:0;
+        right:0;
+
+        display:flex;
+        flex-direction:column;
+
+        gap:5px;
+
+        padding:12px;
+
+        background:
+            linear-gradient(
+                145deg,
+                rgba(20,20,20,.98),
+                rgba(7,7,7,.98)
+            );
+
+        border:1px solid rgba(255,215,0,.15);
+
+        border-radius:18px;
+
+        box-shadow:
+            0 20px 50px rgba(0,0,0,.6),
+            0 0 30px rgba(255,215,0,.04);
+
+        backdrop-filter:blur(20px);
+
+        opacity:0;
+        visibility:hidden;
+
+        transform:
+            translateY(-10px)
+            scale(.98);
+
+        transition:.3s;
+    }
+
+    .nav-menu.active{
+        opacity:1;
+        visibility:visible;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+    .nav-menu a{
+        margin:0;
+
+        width:100%;
+
+        padding:15px 16px;
+
+        border-radius:12px;
+
+        font-size:14px;
+
+        color:#ddd;
+    }
+
+    .nav-menu a:hover{
+        background:rgba(255,215,0,.07);
+
+        color:#ffd700;
+    }
+
+    .nav-menu a::after{
+        display:none;
+    }
+
+}
 </style>
 
 </head>
@@ -298,35 +937,29 @@ footer{
 
 
 <header>
+    <div class="nav">
 
-<div class="nav">
+        <div class="logo">
+            💎 GOLD NOMERLAR
+        </div>
 
-<div class="logo">
-💎 GOLD NOMERLAR
-</div>
+        <button class="menu-toggle" id="menuToggle">
+            ☰
+        </button>
 
-<div>
+        <nav class="nav-menu" id="navMenu">
 
-<a href="#home">
-Bosh sahifa
-</a>
+            <a href="#home">Bosh sahifa</a>
 
-<a href="#nomerlar">
-Nomerlar
-</a>
+            <a href="#nomerlar">Nomerlar</a>
 
-<a href="#aksiya">
-Aksiya
-</a>
+            <a href="#aksiya">Aksiya</a>
 
-<a href="#aloqa">
-Aloqa
-</a>
+            <a href="#aloqa">Aloqa</a>
 
-</div>
+        </nav>
 
-</div>
-
+    </div>
 </header>
 
 
@@ -522,7 +1155,37 @@ GOLD NOMERLAR © 2026
 Toshkent shahri, Chilonzor 16-mavze, 18
 
 </footer>
+<script>
+const menuToggle = document.getElementById("menuToggle");
+const navMenu = document.getElementById("navMenu");
 
+menuToggle.addEventListener("click", () => {
+
+    navMenu.classList.toggle("active");
+
+    if(navMenu.classList.contains("active")){
+        menuToggle.innerHTML = "✕";
+    }else{
+        menuToggle.innerHTML = "☰";
+    }
+
+});
+
+
+/* Link bosilganda menyu yopiladi */
+
+document.querySelectorAll(".nav-menu a").forEach(link => {
+
+    link.addEventListener("click", () => {
+
+        navMenu.classList.remove("active");
+
+        menuToggle.innerHTML = "☰";
+
+    });
+
+});
+</script>
 
 <script type="module">
 
